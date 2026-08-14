@@ -7,7 +7,7 @@
 \usepackage{color,graphicx} % for dvips(k)
 \usepackage{amsmath,amssymb,amsfonts}
 \usepackage{algorithmic}
-
+\usepackage{array}
 \usepackage{fancyhdr}
 
 \title{Building a Khmer Traffic Sign Dataset for Automated Detection and Classification}
@@ -53,30 +53,22 @@ The proposed collection consists of 42 classes of traffic sign types collected u
 Furthermore, YOLOv8 and YOLOv10 were trained and evaluated to find out the effectiveness for Khmer traffic sign detection and classification.
 
 \input{sections/dataset}
+\input{sections/methodology.tex}
 \begin{table*}[ht]
 \caption{Units for Magnetic Properties}
 \label{fontstyle}
 \centering
-\begin{tabular}{lcc} \hline\hline
-Elements & Style in MSWord & Size in \LaTeX \\ \hline
-$\Phi $&
-magnetic flux&
-1 Mx $\to  10^{-8}$ Wb $= 10^{-8}$ V$\cdot $s \\
-$B$&
-magnetic flux density, \par magnetic induction&
-1 G $\to  10^{-4}$ T $= 10^{-4}$ Wb/m$^{2}$ \\
-$H$&
-magnetic field strength&
-1 Oe $\to  10^{3}/(4\pi )$ A/m \\
-$m$&
-magnetic moment&
-1 erg/G $=$ 1 emu \par $\to 10^{-3}$ A$\cdot $m$^{2} = 10^{-3}$ J/T \\
-$M$&
-magnetization&
-1 erg/(G$\cdot $cm$^{3}) =$ 1 emu/cm$^{3}$ \par $\to 10^{3}$ A/m \\
-4$\pi M$&
-magnetization&
-1 G $\to  10^{3}/(4\pi )$ A/m \\
+\begin{tabular}{lcccc} \hline\hline
+Subset & Total & Training & Validation & Testing \\ \hline
+Images &
+31667&
+22148 \\
+Labels &
+31544&
+22064\\
+Bouding Box &
+32036&
+22400 \\
 \hline\hline
 \end{tabular}
 \end{table*}

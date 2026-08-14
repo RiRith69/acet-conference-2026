@@ -33,3 +33,45 @@ bounding boxes were fixed before finish datasets.
     \label{fig:annotation}
 \end{figure}
 \subsection{Data Statistics}
+The proposed dataset consisted of 31667 images illustrating 42 classes and 31734 for annotated traffic signs, while 123
+images are the images contain backgrounds images without traffic signs annotation. The number of annotated images exceeds 
+the number of images because some images contain multiple annotated traffic signs.
+The distribution of annotated across the 42 classes demonstrated in Figure 3, displaying the variance in each class
+represent within the dataset. To simplify model training, validation and testing. The dataset was divided into training,
+validation, and testing subsets using a [70:20:10] ratio. The trainging subset was used to enhance the model parameters,
+while validation was utilized to check model performance throughout training. The testing subset designed for the final
+evaluation of the train models. The number of propotion of images assigned to each subset are summariezed in Table 1.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\columnwidth]{./fig/Distribution_Dataset.png}
+    \caption{Class distribution of images and annotated traffic signs across the 42 classes.}
+    \label{fig:distribution}
+\end{figure}
+\begin{table*}[ht]
+    \caption{Distribution of Images and Annotations in the Proposed Dataset} 
+    \label{tab:magnetic-properties}
+    \centering
+    \begin{tabular}{ccccc}
+        \hline\hline
+        Dataset Subset & Total & Training & Validation & Testing \\ \hline
+
+        Images &
+        31667 &
+        22148 &
+        6318 &
+        3201 \\
+
+        Labels &
+        31544 &
+        22064 &
+        6292 &
+        3188 \\
+
+        Bounding Box &
+        31734 &
+        22195 &
+        6335 &
+        3204\\
+        \hline\hline
+    \end{tabular}
+\end{table*}
