@@ -7,7 +7,116 @@ The process begins with data preparation and data preprocessing for the annotate
 and training under experimental set up. After training, the models will evaluated on the test dataset using standard object detection metrics.
 The obtained results are subsequently compared to identify model that achieves performance for Khmer dataset. 
 \subsection{Data Preprocessing}
+This stage was conducted to ensure that the dataset was properly prepared and the images and annotations were accurate and suitable for model processing.
+\subsubsection{Data Cleaning}
+The collected dataset was first reviewed to delete unnecessary or low quality images. Duplicates images were detected and eliminated to prevents repeated samples
+from introducing bias into the training dataset. Furthermore, the images with serve blur were identified and removed when the traffic sign were not clearly recognizable.
 
+The annotation files were also checked for duplicate or inconsisitent lables. The image and label were reviewed to ensure that each image was associated with the correct
+annotation informations. These cleaning methods were conducted before the annotation verification and model training stages.
+\subsubsection{Annotation and Label Verification}
+Following data cleaning, the annotation and matching class labels were verified to ensure their validation and consistency. The bounding boxes were checked to confirm that they accurate involved the traffic sign 
+without unnecessary background regions. The images contain several traffic sign were annotated with a separate bounding box for each sign. The image without traffic sign that identified as a background were kept. 
+The class labels were checked the class id in each annotation to ensure both images and labels are consistent.
 \subsection{Model Development}
+Two YOLO-based object detection models, YOLOv8 and YOLOv10, were trained on the proposed Khmer traffic sign dataset to detect and classify 42 traffic sign classes. The development process involved configuring each model for propose detection
+task, training the models using the prepared dataset, and evaluating the model performance under consistent experimental condition. The architecture of two models are described in following subsections.
+\subsubsection{YOLOv8 Architecture}
+YOLOv8 is a one-stage, anchor-free object detection model applied for Khmer traffic sign detection and classification, with its overall architecture pipeline represent in Figure 4. The input images are resized to 832 x 832 before processing. The backbone uses convolutional layers, 
+C2f modules, and Spatial Pyramid Pooling-Fast (SPPF), which extract features at different spatial resolutions. The extracted feature maps are passed to the neck, which uses an FPN-PAN structure to perform multi-scale feature fusion through upsampling, concatenation, and convolutional operations. 
+Finally, the anchor-free, decoupled detection head generates predictions at three feature levels, P3, P4, and P5, with strides of 8, 16, and 32, respectively, for bounding-box regression and classification \cite{terven-2023}, \cite{ultralytics-2026}.
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=7.5cm]{./fig/YOLOv8-Architecture.png}
+    \caption{YOLOv8-based architecture for Khmer traffic sign detection and classification}
+    \label{fig:YOLOv8-Architecture}
+\end{figure}
+\subsubsection{YOLOv10 Architecture}
+The overall architecture of YOLOv10 designed for Khmer traffic sign recognition is presented in Figure 5. YOLOv10 is designed as an end-to-end object detector that avoids the Non-Maximum Suppression (NMS).
+In this study, the images are downsized to 832 x 832 before process by the network. The backbone utilizes efficient design including Compact Inverted Block (CIB) modules and Spatial-Channel Decoupled Downsampling (SCDown)
+to enhance the computing performance while maintain an important feature information. In advanced stages, the model integrates Partial Self-Attention (PSA) to enhance global feature representation with minimum computational cost.
+The neck performs multi-scale feature fusion using a PAN-based structure to merge semantic and Spatial Information from differnt features levels. Ultimately, YOLOv10 adopts a consistent dual-assignment method with one-to-many and
+one-to-one prediction head during training. One-to-many head provides the model more training information for each object, while the one-to-one head is preserved during inference to provide the final prediction without require NMS \cite{wang-2024}. 
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=7.5cm]{./fig/YOLOv10-Architecture.jpg}
+    \caption{YOLOv10-based architecture for Khmer traffic sign detection and classification}
+    \label{fig:YOLOv10-Architecture}
+\end{figure}
 \subsection{Model Training}
-\subsection{Evaluation}
+The experiment were conducted using Google Colab with an NVIDIA Tesla T4 GPU (15GB VRAM) to train the YOLOv8 and YOLOv10 models. Both models were develop using the Ultralytics framework, established with their pretrained weights, and fine-tuned on the
+prepared Khmer traffic sign dataset. The dataset for this experiment was split into 70\% for training, 20\% for validation and 10\% for testing as shown in the Table 1.
+
+Both model were trained with an input image size of 832 x 832 pixels, and a batch size of 6 for a maximum of 40 epochs. The AdamW optimizer was used for model optimization, with validation performance during training to monitor the model performance.
+The detailed training configuration and hyperparameter are summarized in Table 2.
+\begin{table}[ht]
+    \centering
+    \caption{Training Configuration and Hyperparameters}
+    \label{tab:training_hyperparameters}
+    \begin{tabular}{lcc}
+        \hline\hline
+        Hyperparameter & YOLOv8 & YOLOv10 \\ 
+        \hline
+        Image Size & $832 \times 832$ & $832 \times 832$ \\
+        Batch Size & 6 & 6 \\
+        Epochs & 40 & 40 \\
+        Optimizer & AdamW & AdamW \\
+        Learning Rate & 0.001 & 0.001 \\
+        Weight Decay & 0.0005 & 0.0005 \\
+        Workers & 2 & 2 \\
+        Patience & 20 & 20 \\
+        \hline\hline
+    \end{tabular}
+\end{table}
+\subsection{Model Evaluation}
+Model Evaluation is the process of using the different evaluating method to analyze machine learning model performance. As shown it is a crucial step for machine learning process, as it determines the models ability to generalize to unseen data and make accurate predictions.
+In this research, the models were evaluated on unseen data standard object detection metric to evaluate their ability for recognize Khmer traffic sign.
+
+The evaluation metric used in this study include:
+
+\textbf{Accuracy:} is the propotion of correct predictions among the total number of predictions made by the model.
+\begin{equation}
+    \mathrm{Accuracy} = \frac{\mathrm{TP} + \mathrm{TN}}{\mathrm{TP} + \mathrm{FP} + \mathrm{FN} + \mathrm{TN}}
+    \label{eq:accuracy}
+\end{equation}
+
+\textbf{Precision:} is the propotion of correctly detected among all the traffic signs predicted by the model.
+\begin{equation}
+    \mathrm{Precision} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FP}}
+    \label{eq:precision}
+\end{equation}
+
+\textbf{Recall:} is the ratio of correctly detected object among all actual objects in the dataset.
+\begin{equation}
+    \mathrm{Recall} = \frac{\mathrm{TP}}{\mathrm{TP} + \mathrm{FN}}
+    \label{eq:recall}
+\end{equation}
+
+\textbf{F1-Score:} is an evaluation metric that combines precision and recall to measure the overall performance of the model.
+\begin{equation}
+    \mathrm{F1\text{-}Score} =
+    2 \times
+    \frac{\mathrm{Precision} \times \mathrm{Recall}}
+    {\mathrm{Precision} + \mathrm{Recall}}
+    \label{eq:F1-Score}
+\end{equation}
+
+\textbf{Intersection over Union (IoU):} is measures the overlap between the predicted bounding box and the ground-truth bounding box.
+\begin{equation}
+    \mathrm{IoU} =
+    \frac{\text{Area of Intersection}}
+         {\text{Area of Union}}
+    \label{eq:IoU}
+\end{equation}
+
+\textbf{mean Average Precision (mAP):} is an evaluation metric used to measure the overall performance of an object detection model,
+often given as mAP@50 and mAP@95, by calculating the average precision (AP) overall traffic sign classes at different thresholds.
+\begin{equation}
+    \mathrm{mAP} =
+    \frac{1}{N}
+    \sum_{i=1}^{N} \mathrm{AP}_i
+    \label{eq:mAP}
+\end{equation}
+
+In this research, True Positive (TP) represent a correctly detected traffic sign, True Negative (TN) represents a correctly identified non-traffic-sign region, 
+False Positive (FP) represents an incorrect detection and False Negative (FN) represents a traffic sign that is missed by the model \cite{unknown-author-no-date}.
