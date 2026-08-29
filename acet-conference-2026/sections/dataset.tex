@@ -5,7 +5,7 @@ The dataset was manually collected and annotated for traffic sign detection and 
 This paper introduces custom Khmer traffic sign dataset designed for traffic sign detection and classification in Cambodia road conditions.
 The proposed dataset was collected and annotated by our team, which consisted of 42 classes that consisting several categories including
 regulation, warning, required, and informational signals. The collected images demonstrate various real-world environments with differences
-in lighting, angles, distances and backgrounds. Figure 1 demonstrates the complete set of traffic sign classes included in the proposed dataset.
+in lighting, angles, distances and backgrounds. Figure \ref{fig:sign_classes} demonstrates the complete set of traffic sign classes included in the proposed dataset.
 In the next section will detail the data collection, annotation and data statistics.
 \begin{figure}[ht]
 \fontsize{18}{8}\selectfont 
@@ -36,11 +36,11 @@ bounding boxes were fixed before finish datasets.
 The proposed dataset consisted of 31667 images illustrating 42 classes and 31734 for annotated traffic signs, while 123
 images are the images contain backgrounds images without traffic signs annotation. The number of annotated images exceeds 
 the number of images because some images contain multiple annotated traffic signs.
-The distribution of annotated across the 42 classes demonstrated in Figure 3, displaying the variance in each class
+The distribution of annotated across the 42 classes demonstrated in Figure \ref{fig:distribution}, displaying the variance in each class
 represent within the dataset. To simplify model training, validation and testing. The dataset was divided into training,
 validation, and testing subsets using a [70:20:10] ratio. The trainging subset was used to enhance the model parameters,
 while validation was utilized to check model performance throughout training. The testing subset designed for the final
-evaluation of the train models. The number of propotion of images assigned to each subset are summariezed in Table 1.
+evaluation of the train models. The number of propotion of images assigned to each subset are summariezed in Table \ref{tab:magnetic-properties}.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\columnwidth]{./fig/Distribution_Dataset.png}

@@ -24,9 +24,9 @@ to develop and evaluate reliable detection and classification models for Cambodi
 Khmer datasets, this research introduces a custom Khmer traffic sign datasets collected and annotated 
 the capture image from various locations in Cambodia. The datasets contain an image captured under multiple 
 real-world conditions including differnt lighting, different angles, distance, background and covers 42 classes commonly found in Cambodia. 
-To evaluate the dataset, YOLOv8 and YOLOv10 models were trained and compared.
-YOLOv8 achieved the best performance with an accuracy of 93\%
-on the primary dataset and was integrated into a bilingual web-based application supporting both Khmer and English languages for automated traffic sign detection and classification.
+To evaluate the dataset, YOLOv8 and YOLOv10 models were trained and compared using multiple detection performance metrics.
+The results showed that YOLOv8 achieved slightly better overall performance across the majority of evaluation metrics, while both models demonstrated strong detection performance on the Khmer traffic sign dataset.
+The selected YOLOv8 model was further integrated into a bilingual web-based application supporting both Khmer and English languages for automated traffic sign detection and classification.
 This system demonstrates the practical application of deep learning-based Khmer traffic sign
 recognition and provides a foundation for future research and intelligent transportation applications in Cambodia.
 }
@@ -55,16 +55,10 @@ Furthermore, YOLOv8 and YOLOv10 were trained and evaluated to find out the effec
 \input{sections/dataset}
 \input{sections/methodology.tex}
 \input{sections/result&discussion.tex}
-
-
-\section{Conclusion}
-Although a conclusion may review the  main points of the paper, do not replicate the abstract as the conclusion. A
-conclusion might elaborate on the importance of the work or suggest applications and extensions.
-
+\input{sections/conclusion.tex}
 
 \subsection*{Acknowledgment}
-
-Thanks to XXXXXXXXXXX.  This format is a modification of ONA 2018, SNLP 2013, KICSS2006 and IJCKS2007 style file.
+I would like to express their sincere gratitude to our former team members for their valuable assistance and contributions to data collection, data annotation, and model training throughout this research.
 
 
 % fdkjfdkfd \cite{chakraborty2014compact} kfkdfd.

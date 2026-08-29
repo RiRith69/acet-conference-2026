@@ -22,7 +22,7 @@ The class labels were checked the class id in each annotation to ensure both ima
 Two YOLO-based object detection models, YOLOv8 and YOLOv10, were trained on the proposed Khmer traffic sign dataset to detect and classify 42 traffic sign classes. The development process involved configuring each model for propose detection
 task, training the models using the prepared dataset, and evaluating the model performance under consistent experimental condition. The architecture of two models are described in following subsections.
 \subsubsection{YOLOv8 Architecture}
-YOLOv8 is a one-stage, anchor-free object detection model applied for Khmer traffic sign detection and classification, with its overall architecture pipeline represent in Figure 4. The input images are resized to 832 x 832 before processing. The backbone uses convolutional layers, 
+YOLOv8 is a one-stage, anchor-free object detection model applied for Khmer traffic sign detection and classification, with its overall architecture pipeline represent in Figure \ref{fig:YOLOv8-Architecture}. The input images are resized to 832 x 832 before processing. The backbone uses convolutional layers, 
 C2f modules, and Spatial Pyramid Pooling-Fast (SPPF), which extract features at different spatial resolutions. The extracted feature maps are passed to the neck, which uses an FPN-PAN structure to perform multi-scale feature fusion through upsampling, concatenation, and convolutional operations. 
 Finally, the anchor-free, decoupled detection head generates predictions at three feature levels, P3, P4, and P5, with strides of 8, 16, and 32, respectively, for bounding-box regression and classification \cite{terven-2023}, \cite{ultralytics-2026}.
 \begin{figure}[ht]
@@ -32,7 +32,7 @@ Finally, the anchor-free, decoupled detection head generates predictions at thre
     \label{fig:YOLOv8-Architecture}
 \end{figure}
 \subsubsection{YOLOv10 Architecture}
-The overall architecture of YOLOv10 designed for Khmer traffic sign recognition is presented in Figure 5. YOLOv10 is designed as an end-to-end object detector that avoids the Non-Maximum Suppression (NMS).
+The overall architecture of YOLOv10 designed for Khmer traffic sign recognition is presented in Figure \ref{fig:YOLOv10-Architecture}. YOLOv10 is designed as an end-to-end object detector that avoids the Non-Maximum Suppression (NMS).
 In this study, the images are downsized to 832 x 832 before process by the network. The backbone utilizes efficient design including Compact Inverted Block (CIB) modules and Spatial-Channel Decoupled Downsampling (SCDown)
 to enhance the computing performance while maintain an important feature information. In advanced stages, the model integrates Partial Self-Attention (PSA) to enhance global feature representation with minimum computational cost.
 The neck performs multi-scale feature fusion using a PAN-based structure to merge semantic and Spatial Information from differnt features levels. Ultimately, YOLOv10 adopts a consistent dual-assignment method with one-to-many and
@@ -45,10 +45,10 @@ one-to-one prediction head during training. One-to-many head provides the model 
 \end{figure}
 \subsection{Model Training}
 The experiment were conducted using Google Colab with an NVIDIA Tesla T4 GPU (15GB VRAM) to train the YOLOv8 and YOLOv10 models. Both models were develop using the Ultralytics framework, established with their pretrained weights, and fine-tuned on the
-prepared Khmer traffic sign dataset. The dataset for this experiment was split into 70\% for training, 20\% for validation and 10\% for testing as shown in the Table 1.
+prepared Khmer traffic sign dataset. The dataset for this experiment was split into 70\% for training, 20\% for validation and 10\% for testing as shown in the Table \ref{tab:magnetic-properties}.
 
 Both model were trained with an input image size of 832 x 832 pixels, and a batch size of 6 for a maximum of 40 epochs. The AdamW optimizer was used for model optimization, with validation performance during training to monitor the model performance.
-The detailed training configuration and hyperparameter are summarized in Table 2.
+The detailed training configuration and hyperparameter are summarized in Table \ref{tab:training_hyperparameters}.
 \begin{table}[ht]
     \centering
     \caption{Training Configuration and Hyperparameters}
